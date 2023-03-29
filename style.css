@@ -1,0 +1,93 @@
+input[type="file"] {
+  opacity: 0;
+  /* make transparent */
+  z-index: -1;
+  /* move under anything else */
+  position: absolute;
+  /* don't let it take up space */
+}
+
+body,
+html {
+  font-family: 'Courier New', Courier, monospace;
+  margin: 0;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+h1,
+p {
+  text-align: center;
+  padding: 20px;
+}
+
+.txt,
+select,
+form>div {
+  display: block;
+  margin: 0 auto;
+  font-size: 16px;
+  padding: 5px;
+}
+
+.txt {
+  resize: none;
+  border-radius: 10px;
+  width: 80%;
+}
+
+select {
+  width: 83%;
+}
+
+form>div {
+  width: 81%;
+}
+
+.txt,
+form>div {
+  margin-bottom: 10px;
+  overflow: auto;
+}
+
+
+label {
+  width: 10%;
+  line-height: 1.5;
+}
+
+.rate-value,
+.pitch-value {
+  width: 5%;
+  line-height: 1.5;
+}
+
+#rate,
+#pitch {
+  width: 81%;
+}
+
+.controls {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.controls button {
+  padding: 10px;
+}
+#play {
+  font-size: 2em;
+  width: 80%;
+  border-radius: 50px;
+}
+#pdfCtr {
+  width: 100%;
+}
