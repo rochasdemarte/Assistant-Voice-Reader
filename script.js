@@ -35,7 +35,6 @@ function populateVoiceList() {
 
     if (voices[i].default) {
       userDefaultVoice = i;
-      option.textContent += " | DEFAULT";
     }
 
     option.setAttribute("data-lang", voices[i].lang);
