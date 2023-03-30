@@ -17,18 +17,23 @@ body {
   align-items: center;
   min-height: 100vh;
   margin: 0;
-  padding: 20px;
+  padding-top: 60px;
   color: #f8783c;
   background-image: linear-gradient(-180deg, #1c191b, #000000);
   font: 1.25rem/1 'Poppins', sans-serif;
+  user-select: none;
 }
 
 h1 {
-  border-bottom: 1px solid #fff3;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #0003;
+  border-bottom: 1px solid rgba(19, 19, 19, 0.2);
   color: #f8783c;
   margin: 0;
   text-align: center;
-  padding: 5px 20px;
+  padding: 15px 20px;
 }
 
 .txt,
@@ -38,14 +43,21 @@ select {
   font-size: 16px;
   padding: 5px;
   border-radius: 20px;
+  box-shadow: inset 0 0 10px 5px #0009
 }
 
 .txt {
+  user-select: text;
   padding: 20px;
   resize: none;
   width: 80%;
   color: #ede3e9;
   background: rgb(20, 20, 20);
+}
+
+textarea:focus, input:focus{
+  outline: none;
+  border-color: #f8783c;
 }
 
 mark {
@@ -118,7 +130,7 @@ button:disabled:hover {
 
 span {
   position: fixed;
-  top: 50px;
+  top: 25px;
   right: 50px;
   margin: 0 auto;
   cursor: pointer;
@@ -129,7 +141,7 @@ span:hover {
 }
 
 .container {
-  width: 600px;
+  width: 720px;
   max-width: calc(100vw - 40px);
   padding: 30px;
   border-radius: 10px;
@@ -165,6 +177,7 @@ span:hover {
 
 .voice-container {
   position: relative;
+  top: 25%;
   width: 600px;
   max-width: calc(80vw - 40px);
 }
@@ -224,6 +237,11 @@ span:hover {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #f8783c;
+}
+
+::selection {
+  background-color: #ffffff;
+  color: #f8783c
 }
 
 @media screen and (max-height: 450px) {

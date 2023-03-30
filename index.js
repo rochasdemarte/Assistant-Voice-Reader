@@ -14,7 +14,7 @@ async function getContent(source) {
 async function getItems(source) {
     const content = await getContent(source);
     const items = content.items.map((item) => {
-        document.querySelector(".txt").value += item.str;
+        $(".txt").value += item.str;
     });
     return items;
 }
