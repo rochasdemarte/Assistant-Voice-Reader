@@ -23,3 +23,13 @@ fileInput.onchange= (e) => {
     file = window.URL.createObjectURL(fileInput.files[0]);
     getItems(file);
 }
+
+function openVoiceConfig() {
+    $(".voice-config").style.width = "100%";
+    $(".voice-config").style.padding = "30px";
+  }
+
+function closeVoiceConfig() {
+    $(".voice-config").style.width = "0%";
+    $(".voice-config").style.padding = "0";
+  }

@@ -1,16 +1,21 @@
 const synth = window.speechSynthesis;
 
-const inputForm = document.querySelector("form");
-const inputTxt = document.querySelector(".txt");
-const voiceSelect = document.querySelector("select");
+const inputTxt = $(".txt");
+const voiceSelect = $("select");
 
-const pitch = document.querySelector("#pitch");
-const pitchValue = document.querySelector(".pitch-value");
-const rate = document.querySelector("#rate");
-const rateValue = document.querySelector(".rate-value");
+const textEl = $('#text-display');
+const playEl = $('#play');
+const pauseEl = $('#pause');
+const stopEl = $('#stop');
+
+const pitch = $("#pitch");
+const pitchValue = $(".pitch-value");
+const rate = $("#rate");
+const rateValue = $(".rate-value");
 
 let userDefaultVoice = -1;
 let voices = [];
+let tempText = '';
 
 function populateVoiceList() {
   voices = synth.getVoices().sort(function (a, b) {
@@ -50,23 +55,23 @@ if (speechSynthesis.onvoiceschanged !== undefined) {
   speechSynthesis.onvoiceschanged = populateVoiceList;
 }
 
-function speak() {
+function play() {
   if (synth.speaking) {
-    console.error("speechSynthesis.speaking");
+    synth.resume();
+    console.log("Speech Synthesis Resumed");
     return;
   }
 
   if (inputTxt.value !== "") {
-    const utterThis = new SpeechSynthesisUtterance(inputTxt.value);
+    tempText = inputTxt.value;
+    const utterThis = new SpeechSynthesisUtterance(tempText);
 
-    utterThis.onend = function (event) {
-      console.log("SpeechSynthesisUtterance.onend");
-    };
+    utterThis.addEventListener('start', handleStart);
+    utterThis.addEventListener('pause', handlePause);
+    utterThis.addEventListener('resume', handleResume);
+    utterThis.addEventListener('end', handleEnd);
+    utterThis.addEventListener('boundary', handleBoundary);
 
-    utterThis.onerror = function (event) {
-      console.error("SpeechSynthesisUtterance.onerror");
-    };
-    
     const selectedOption =
       voiceSelect.selectedOptions[0].getAttribute("data-name");
 
@@ -80,19 +85,77 @@ function speak() {
     utterThis.rate = rate.value;
     synth.cancel();
     synth.speak(utterThis);
+    console.log("Speech Synthesis Started");
     var r = setInterval(function () {
-        console.log(synth.speaking);
-        if (!synth.speaking) clearInterval(r);
-        else synth.resume();
+      console.log(synth.speaking);
+      if (!synth.speaking) clearInterval(r);
+      else synth.resume();
     }, 14000);
   }
 }
 
-inputForm.onsubmit = function (event) {
+function pause() {
+  synth.pause();
+  console.log("Speech Synthesis Paused");
+}
+
+function stop() {
+  synth.cancel();
+  console.log("Speech Synthesis Ended");
+  handleEnd();
+}
+
+function handleStart() {
+  playEl.disabled = true;
+  pauseEl.disabled = false;
+  stopEl.disabled = false;
+}
+
+function handlePause() {
+  playEl.disabled = false;
+  pauseEl.disabled = true;
+  stopEl.disabled = false;
+}
+
+function handleResume() {
+  playEl.disabled = true;
+  pauseEl.disabled = false;
+  stopEl.disabled = false;
+}
+
+function handleEnd() {
+  playEl.disabled = false;
+  pauseEl.disabled = true;
+  stopEl.disabled = true;
+  textEl.innerHTML = tempText;
+}
+
+function handleBoundary(event) {
+  if (event.name === 'sentence') return;
+
+  const wordStart = event.charIndex;
+  let wordLength = event.charLength;
+
+  if (wordLength === undefined) {
+    const match = tempText.substring(wordStart).match(/^[a-z\d']*/i);
+    wordLength = match[0].length;
+  }
+
+  const wordEnd = wordStart + wordLength;
+  const word = tempText.substring(wordStart, wordEnd);
+  const markedText = tempText.substring(0, wordStart) + '<mark>' + word + '</mark>' + tempText.substring(wordEnd);
+  textEl.innerHTML = markedText;
+}
+
+playEl.onclick = function (event) {
   event.preventDefault();
-  speak();
+  play();
   inputTxt.blur();
 };
+
+playEl.addEventListener('click', play);
+pauseEl.addEventListener('click', pause);
+stopEl.addEventListener('click', stop);
 
 pitch.onchange = function () {
   pitchValue.textContent = pitch.value;
@@ -103,5 +166,5 @@ rate.onchange = function () {
 };
 
 voiceSelect.onchange = function () {
-  speak();
+  play();
 };
