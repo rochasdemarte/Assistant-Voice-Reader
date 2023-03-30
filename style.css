@@ -18,14 +18,14 @@ body {
   min-height: 100vh;
   margin: 0;
   padding: 20px;
-  color: #cc3cf8;
+  color: #f8783c;
   background-image: linear-gradient(-180deg, #1c191b, #000000);
   font: 1.25rem/1 'Poppins', sans-serif;
 }
 
 h1 {
   border-bottom: 1px solid #fff3;
-  color: #cc3cf8;
+  color: #f8783c;
   margin: 0;
   text-align: center;
   padding: 5px 20px;
@@ -50,7 +50,7 @@ select {
 
 mark {
   color: #ffffff;
-  background-color: #cc3cf8;
+  background-color: #f8783c;
   /* font-size: 1.2em; */
 }
 
@@ -64,7 +64,7 @@ label {
 }
 
 pdf {
-  color: #cc3cf8;
+  color: #f8783c;
   cursor: pointer;
 }
 
@@ -80,9 +80,9 @@ pdf {
 
 button {
   padding: 5px;
-  border: 1px solid #cc3cf8;
+  border: 1px solid #f8783c;
   border-radius: 999px;
-  color: #cc3cf8;
+  color: #f8783c;
   background-color: #0009;
   font-size: inherit;
   font-family: inherit;
@@ -93,7 +93,7 @@ button {
 
 button:hover {
   color: #0009;
-  background-color: #cc3cf8;
+  background-color: #f8783c;
 }
 
 button:disabled {
@@ -102,7 +102,7 @@ button:disabled {
 }
 
 button:disabled:hover {
-  color: #cc3cf8;
+  color: #f8783c;
   background-color: #0009;
 }
 
@@ -156,7 +156,7 @@ span:hover {
   right: 45px;
   font-size: 60px;
   text-decoration: none;
-  color: #cc3cf8;
+  color: #f8783c;
 }
 
 .voice-config .closebtn:hover {
@@ -193,7 +193,7 @@ span:hover {
   width: 25px;
   height: 25px;
   border-radius: 50%; 
-  background: #cc3cf8;
+  background: #f8783c;
   cursor: pointer;
 }
 
@@ -201,7 +201,7 @@ span:hover {
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  background: #cc3cf8;
+  background: #f8783c;
   cursor: pointer;
 }
 
@@ -223,7 +223,7 @@ span:hover {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #cc3cf8;
+  background: #f8783c;
 }
 
 @media screen and (max-height: 450px) {
