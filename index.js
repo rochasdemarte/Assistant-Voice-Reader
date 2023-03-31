@@ -6,6 +6,7 @@ const autoScrollBtn = $('.auto-scroll');
 let file = '';
 let docContent = [];
 let autoScroll = false;
+let activePage = 0;
 
 async function getContent(source) {
     const doc = await pdfjsLib.getDocument(source).promise;
@@ -31,8 +32,14 @@ function handlePages(pages) {
         div.classList.add('page-number');
         div.setAttribute('data-number', i);
         div.onclick = x => {
-            getItems(div.getAttribute('data-number'));
-
+            if (activePage != i) {
+                getItems(i);
+                document.querySelectorAll('.page-number').forEach(e => {
+                    e.classList.remove('active-page');
+                });
+                div.classList.add('active-page');
+                activePage = i;
+            }
         }
         div.innerText = i;
         pdfPages.append(div);
@@ -54,7 +61,7 @@ function closeVoiceConfig() {
     $(".voice-config").style.padding = "0";
   }
 
-  autoScrollBtn.onmouseover = x => {
+autoScrollBtn.onmouseover = x => {
     x.target.innerText = 'autoscroll keyboard_double_arrow_down'
 }
 
@@ -63,5 +70,6 @@ autoScrollBtn.onmouseout = x => {
 }
 
 autoScrollBtn.onclick = x => {
+    autoScrollBtn.classList.toggle('autoScrollOn');
     autoScroll = !autoScroll;
 }

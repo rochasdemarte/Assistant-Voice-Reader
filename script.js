@@ -63,7 +63,7 @@ function play() {
     return;
   }
 
-  if (inputTxt.value !== "") {
+  if (inputTxt.value.trim() !== "") {
     tempText = inputTxt.value;
     const utterThis = new SpeechSynthesisUtterance(tempText);
 
@@ -148,9 +148,8 @@ function handleBoundary(event) {
   textEl.innerHTML = markedText;
   
   const newY = Math.round(document.getElementsByTagName('mark')[0].getBoundingClientRect().top);
-  console.log(y, newY);
-  if (autoScroll && y != newY) {
-    y = newY;
+  if (autoScroll && y < newY - 100) {
+    y = newY - 100;
     window.scrollTo(0, y);
   }
 }

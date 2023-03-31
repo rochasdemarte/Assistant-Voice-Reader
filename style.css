@@ -134,15 +134,28 @@ button:disabled:hover {
   width: 40px;
   height: 40px;
   padding: 5px;
-  border: 1px solid #f8783c;
+  border: 2px solid #f8783c;
   border-radius: 10px;
   color: #f8783c;
   background-color: #0009;
 }
 
 .page-number:hover {
+  color: #ede3e9;
+  background-color: #0009;
+  border-color: #ede3e9;
+}
+
+.active-page {
   background-color: #f8783c;
   color: #0009;
+}
+
+
+.active-page:hover {
+  background-color: #ede3e9;
+  color: #0009;
+  border: 2px solid #0009;
 }
 
 #pdfCtr {
@@ -156,7 +169,7 @@ button:disabled:hover {
 }
 
 span {
-  transition: 0.5s;
+  transition: 0.9s;
   position: fixed;
   margin: 0 auto;
   cursor: pointer;
@@ -174,6 +187,10 @@ span:hover {
 .auto-scroll {
   bottom: 50px;
   right: 50px;
+}
+
+.autoScrollOn {
+  color: #ede3e9;
 }
 
 .container {
@@ -275,6 +292,11 @@ span:hover {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #f8783c;
+}
+
+.pdf-pages::-webkit-scrollbar {
+  height: 5px;
+  display: block;
 }
 
 ::selection {
