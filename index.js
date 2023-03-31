@@ -1,27 +1,47 @@
 const $ = x => document.querySelector(x);
 const pdf = pdfjsLib;
+const pdfPages = $(".pdf-pages");
 const fileInput = $("#mypdf");
+const autoScrollBtn = $('.auto-scroll');
 let file = '';
-let pageNumber = 1;
+let docContent = [];
+let autoScroll = false;
 
 async function getContent(source) {
     const doc = await pdfjsLib.getDocument(source).promise;
-    console.log(doc.numPages);
-    const page = await doc.getPage(pageNumber);
-    return await page.getTextContent();
+    handlePages(doc.numPages);
+    for(var i = 1; i <= doc.numPages; i++){
+        const page = await doc.getPage(i);
+        docContent.push(await page.getTextContent());
+    }
 }
 
-async function getItems(source) {
-    const content = await getContent(source);
+async function getItems(page) {
+    const content = docContent[page - 1];
+    $(".txt").value = '';
     const items = content.items.map((item) => {
         $(".txt").value += item.str;
     });
     return items;
 }
 
+function handlePages(pages) {
+    for (let i = 1; i <= pages; i++) {
+        const div = document.createElement('div');
+        div.classList.add('page-number');
+        div.setAttribute('data-number', i);
+        div.onclick = x => {
+            getItems(div.getAttribute('data-number'));
+
+        }
+        div.innerText = i;
+        pdfPages.append(div);
+    }
+}
+
 fileInput.onchange= (e) => {
     file = window.URL.createObjectURL(fileInput.files[0]);
-    getItems(file);
+    getContent(file);
 }
 
 function openVoiceConfig() {
@@ -33,3 +53,15 @@ function closeVoiceConfig() {
     $(".voice-config").style.width = "0%";
     $(".voice-config").style.padding = "0";
   }
+
+  autoScrollBtn.onmouseover = x => {
+    x.target.innerText = 'autoscroll keyboard_double_arrow_down'
+}
+
+autoScrollBtn.onmouseout = x => {
+    x.target.innerText = 'keyboard_double_arrow_down'
+}
+
+autoScrollBtn.onclick = x => {
+    autoScroll = !autoScroll;
+}

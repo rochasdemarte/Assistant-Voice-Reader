@@ -16,6 +16,7 @@ const rateValue = $(".rate-value");
 let userDefaultVoice = -1;
 let voices = [];
 let tempText = '';
+let y = 0;
 
 function populateVoiceList() {
   voices = synth.getVoices().sort(function (a, b) {
@@ -145,6 +146,13 @@ function handleBoundary(event) {
   const word = tempText.substring(wordStart, wordEnd);
   const markedText = tempText.substring(0, wordStart) + '<mark>' + word + '</mark>' + tempText.substring(wordEnd);
   textEl.innerHTML = markedText;
+  
+  const newY = Math.round(document.getElementsByTagName('mark')[0].getBoundingClientRect().top);
+  console.log(y, newY);
+  if (autoScroll && y != newY) {
+    y = newY;
+    window.scrollTo(0, y);
+  }
 }
 
 playEl.onclick = function (event) {

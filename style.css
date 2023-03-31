@@ -1,5 +1,6 @@
 *, *::before, *::after {
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 input[type="file"] {
@@ -19,7 +20,7 @@ body {
   margin: 0;
   padding-top: 60px;
   color: #f8783c;
-  background-image: linear-gradient(-180deg, #1c191b, #000000);
+  background-image: linear-gradient(-180deg, #0e0e0e, #000000);
   font: 1.25rem/1 'Poppins', sans-serif;
   user-select: none;
 }
@@ -118,6 +119,32 @@ button:disabled:hover {
   background-color: #0009;
 }
 
+.pdf-pages {
+  box-shadow: inset 0 0 10px 5px #0009;
+  background: rgb(20, 20, 20);
+  width: 720px;
+  margin-bottom: 10px;
+  max-width: calc(100vw - 40px);
+  overflow-y: scroll;
+  white-space: nowrap;
+}
+
+.page-number {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  padding: 5px;
+  border: 1px solid #f8783c;
+  border-radius: 10px;
+  color: #f8783c;
+  background-color: #0009;
+}
+
+.page-number:hover {
+  background-color: #f8783c;
+  color: #0009;
+}
+
 #pdfCtr {
   width: 100%;
 }
@@ -129,9 +156,8 @@ button:disabled:hover {
 }
 
 span {
+  transition: 0.5s;
   position: fixed;
-  top: 25px;
-  right: 50px;
   margin: 0 auto;
   cursor: pointer;
 }
@@ -140,12 +166,24 @@ span:hover {
   color: #ede3e9;
 }
 
+.config {
+  top: 25px;
+  right: 50px;
+}
+
+.auto-scroll {
+  bottom: 50px;
+  right: 50px;
+}
+
 .container {
   width: 720px;
   max-width: calc(100vw - 40px);
   padding: 30px;
   border-radius: 10px;
   background-color: #0003;
+  text-align: justify;
+  box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.579)
 }
 
 .voice-config {
@@ -157,7 +195,7 @@ span:hover {
   z-index: 1;
   left: 0;
   top: 0;
-  background-color: #000000cf;
+  background-color: #000000e6;
   overflow-x: hidden;
   transition: 0.5s;
 }
@@ -166,7 +204,7 @@ span:hover {
   position: absolute;
   top: 20px;
   right: 45px;
-  font-size: 60px;
+  font-size: 42px;
   text-decoration: none;
   color: #f8783c;
 }
